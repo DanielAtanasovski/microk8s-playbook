@@ -29,4 +29,3 @@
         changed_when: false
         ansible.builtin.command:
             cmd: microk8s status --wait-ready
-        register: myoutput

@@ -3,12 +3,12 @@ all:
     master:
       hosts:
         masternode:
-          ansible_host: masternode
+          ansible_host: 192.168.86.49 # masternode
     worker:
       hosts:
         worker_1:
-          ansible_host: worker1
+          ansible_host: 192.168.86.248 # worker1
         worker_2:
-          ansible_host: worker2
+          ansible_host: 192.168.86.247 # worker2
         worker_3:
-          ansible_host: worker3
+          ansible_host: 192.168.86.249 # worker3

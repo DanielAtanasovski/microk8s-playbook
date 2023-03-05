@@ -1,24 +1,24 @@
 ---
-# - name: Connection check
-#   hosts: all
-#   tasks:
-#    - name: Ping my hosts
-#      ansible.builtin.ping:
-#    - name: Print message
-#      ansible.builtin.debug:
-#       msg: Hello world
+- name: Connection check
+  hosts: all
+  tasks:
+   - name: Ping my hosts
+     ansible.builtin.ping:
+   - name: Print message
+     ansible.builtin.debug:
+      msg: Hello world
 
-# - name: Apply Common
-#   hosts: all
-#   roles:
-#    - common
-
-- name: Apply Master Specific
-  hosts: master
+- name: Apply Common
+  hosts: all
   roles:
-   - master
+   - common
 
-# - name: Apply Worker Specific
-#   hosts: worker
+# - name: Apply Master Specific
+#   hosts: master
 #   roles:
-#    - worker
+#    - master
+
+- name: Apply Worker Specific
+  hosts: worker
+  roles:
+   - worker

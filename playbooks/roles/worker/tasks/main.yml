@@ -1,0 +1,24 @@
+---
+- name: Join master
+  become: true
+  block:
+      - name: Get Join code
+        delegate_to: "{{ groups['master'][0] }}"
+        changed_when: false
+        register: join_code
+        ansible.builtin.shell:
+            cmd: microk8s add-node | grep -Eo "microk8s join [[:alnum:].:/]+ --worker"
+
+      - name: Save output
+        ansible.builtin.set_fact:
+            join_code: "{{ join_code.stdout }}"
+
+      - name: Add User To Microk8s Group
+        changed_when: false
+        ansible.builtin.command:
+            cmd: "{{ join_code }}"
+
+      - name: Check Microk8s
+        changed_when: false
+        ansible.builtin.command:
+            cmd: microk8s kubectl get no

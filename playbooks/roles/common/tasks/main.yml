@@ -2,12 +2,18 @@
 - name: Setup microk8s
   become: true
   block:
+      - name: Update snap package
+        changed_when: false
+        ansible.builtin.command:
+            cmd: snap refresh microk8s
+
       - name: Snap install microk8s
         community.general.snap:
             name:
                 - microk8s
             state: present
             classic: true
+            channel: latest/stable
 
       - name: Add User To Microk8s Group
         changed_when: false
